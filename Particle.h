@@ -8,16 +8,19 @@ class Particle
 {
 private:
   std::string type {"None"};
-  double mass {0.0};
+  double mass {1000.0};
   double momentum {0.0};
 
 public:
 
   Particle() = default ;
 
-  Particle(std::string particle_type, double particle_mass, double particle_momentum) :
-    type{particle_type}, mass{particle_mass}, momentum{particle_momentum}
-  {};
+  Particle(std::string particle_type, double particle_mass, double particle_momentum)
+  {
+    set_type(particle_type);
+    set_mass(particle_mass);
+    set_momentum(particle_momentum);
+  }
 
   ~Particle(){}
   double gamma();
