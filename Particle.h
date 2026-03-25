@@ -23,8 +23,10 @@ public:
   }
 
   ~Particle(){}
+
   double gamma();
   void print_data();
+
 
   std::string get_type();
   double get_mass();

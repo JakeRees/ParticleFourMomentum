@@ -27,9 +27,9 @@ void Particle::set_type(std::string new_type)
 {
   std::transform(new_type.begin(), new_type.end(), new_type.begin(), ::tolower);
   std::string valid_types[3] = {"electron", "muon", "tau"};
-  for (std::string type : valid_types)
+  for (std::string check : valid_types)
   {
-    if (new_type == type)
+    if (new_type == check)
     {
       type = new_type;
       return;
