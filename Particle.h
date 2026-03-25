@@ -25,10 +25,10 @@ public:
   Particle(Particle&& other) noexcept;
   Particle& operator=(Particle&& other) noexcept;
 
-  std::string get_type();
-  FourMomentum get_four_momentum();
+  std::string get_type() const;
+  FourMomentum get_four_momentum() const;
 
-  void set_type(std::string new_type);
+  void set_type(const std::string& new_type);
   void set_four_momentum(double E, double px, double py, double pz);
 
   void print_data();

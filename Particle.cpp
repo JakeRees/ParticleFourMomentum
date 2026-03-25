@@ -56,17 +56,17 @@ Particle& Particle::operator=(Particle&& other) noexcept
   return *this;
 }
 
-std::string Particle::get_type()
+std::string Particle::get_type() const
 {
  return type;
 }
 
-FourMomentum Particle::get_four_momentum() 
+FourMomentum Particle::get_four_momentum() const
 { 
   return four_momentum; 
 }
 
-void Particle::set_type(std::string new_type)
+void Particle::set_type(const std::string& new_type)
 {
   // Make sure this works regardless of capitilisation
   std::transform(new_type.begin(), new_type.end(), new_type.begin(), ::tolower);

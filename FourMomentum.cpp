@@ -2,16 +2,11 @@
 #include <stdexcept>
 #include <string>
 
-void return_missing_data()
-{
-  std::cerr << "\033[1;31mError: FourMomentum data has been moved or is "
-            << "uninitialised. Returned 0.\033[0m" << std::endl;
-}
-
-void throw_missing_data()
+double throw_missing_data()
 {
   std::cerr << "\033[1;31mError: FourMomentum data has been moved or "
             << "is uninitialised.\033[0m" << std::endl;
+  return 0.0;
 }
 
 FourMomentum::FourMomentum()
@@ -30,7 +25,7 @@ FourMomentum::FourMomentum(double E, double px, double py, double pz)
   four_momentum = new std::vector<double>;
   if(E < 0) {
     std::cerr << "\033[1;31mError: Energy cannot be negative. Received E = " << E
-              << ". Using default value E = 0.\033[0m" << std::endl;
+              << ". Using default value E = 0.0\033[0m" << std::endl;
     E = 0.0;
   }
   four_momentum->push_back(E);
@@ -88,41 +83,25 @@ FourMomentum& FourMomentum::operator=(FourMomentum&& other) noexcept
 
 double FourMomentum::get_E() const
 {
-  if(!four_momentum) 
-  {
-    return_missing_data();
-    return 0.0;
-  }
+  if (!four_momentum) return throw_missing_data();
   return (*four_momentum)[0];
 }
 
 double FourMomentum::get_px() const
 {
-  if(!four_momentum)
-  {
-    return_missing_data();
-    return 0.0;
-  }
+  if (!four_momentum) return throw_missing_data();
   return (*four_momentum)[1];
 }
 
 double FourMomentum::get_py() const
 {
-  if(!four_momentum)
-  {
-    return_missing_data();
-    return 0.0;
-  }
+  if (!four_momentum) return throw_missing_data();
   return (*four_momentum)[2];
 }
 
 double FourMomentum::get_pz() const
 {
-  if(!four_momentum)
-  {
-    return_missing_data();
-    return 0.0;
-  }
+  if (!four_momentum) return throw_missing_data();
   return (*four_momentum)[3];
 }
 
@@ -135,6 +114,7 @@ void FourMomentum::set_E(double E)
               << ". Keeping current value.\033[0m" << std::endl;
     return;
   }
+  
   if(!four_momentum) 
   {
     throw_missing_data();
@@ -173,15 +153,27 @@ void FourMomentum::set_pz(double pz)
   (*four_momentum)[3] = pz;
 }
 
-void FourMomentum::print_value() const
+void FourMomentum::print_value()
 {
-  if(!four_momentum) {
+  if(!four_momentum)
+  {
     throw_missing_data();
     return;
   }
-  std::cout << "(E, px, py, pz) = ("
-            << get_E() << ", "
-            << get_px() << ", "
-            << get_py() << ", "
-            << get_pz() << ") MeV" << std::endl;
+  std::cout << "(E, px, py, pz) = (" << get_E() << ", " << get_px() << ", "
+            << get_py() << ", " << get_pz() << ") MeV" << std::endl;
+}
+
+FourMomentum FourMomentum::operator+(const FourMomentum& other) const
+{
+  // Overloaded "+" operator, sums components pairwise
+  return FourMomentum(get_E() + other.get_E(), get_px() + other.get_px(),
+    get_py() + other.get_py(), get_pz() + other.get_pz());
+}
+ 
+double FourMomentum::dot_product(const FourMomentum& other) const
+{
+  // Returns dot product of two four momentums
+  return get_E()  * other.get_E() - get_px() * other.get_px()
+         - get_py() * other.get_py() - get_pz() * other.get_pz();
 }

@@ -38,7 +38,9 @@ public:
   void set_py(double py);
   void set_pz(double pz);
 
-  void print_value() const;
+  void print_value();
+  FourMomentum operator+(const FourMomentum& other) const;
+  double dot_product(const FourMomentum& other) const;
 };
 
 #endif
