@@ -16,8 +16,9 @@ void throw_missing_data()
 
 FourMomentum::FourMomentum()
 {
+  std::cout << "Calling FourMomentum default constructor" << std::endl;
   four_momentum = new std::vector<double>;
-  four_momentum->push_back(0.0);
+  four_momentum->push_back(1.0);
   four_momentum->push_back(0.0);
   four_momentum->push_back(0.0);
   four_momentum->push_back(0.0);
@@ -25,6 +26,7 @@ FourMomentum::FourMomentum()
 
 FourMomentum::FourMomentum(double E, double px, double py, double pz)
 {
+  std::cout << "Calling FourMomentum paramaterised constructor" << std::endl;
   four_momentum = new std::vector<double>;
   if(E < 0) {
     std::cerr << "\033[1;31mError: Energy cannot be negative. Received E = " << E
@@ -37,9 +39,51 @@ FourMomentum::FourMomentum(double E, double px, double py, double pz)
   four_momentum->push_back(pz);
 }
 
+//Destructor
 FourMomentum::~FourMomentum()
 {
+  std::cout << "Calling FourMomentum destructor" << std::endl;
   delete four_momentum;
+}
+
+// Copy constructor
+FourMomentum::FourMomentum(const FourMomentum& other)
+{
+  std::cout << "Calling FourMomentum copy constructor" << std::endl;
+  four_momentum = new std::vector<double>(*(other.four_momentum));
+}
+ 
+// Copy assignment operator
+FourMomentum& FourMomentum::operator=(const FourMomentum& other)
+{
+  std::cout << "Calling FourMomentum copy assignment operator" << std::endl;
+  if(this != &other)
+  {
+    delete four_momentum;
+    four_momentum = new std::vector<double>(*(other.four_momentum));
+  }
+  return *this;
+}
+ 
+// Move constructor
+FourMomentum::FourMomentum(FourMomentum&& other) noexcept
+{
+  std::cout << "Calling FourMomentum move constructor" << std::endl;
+  four_momentum = other.four_momentum;
+  other.four_momentum = nullptr;
+}
+ 
+// Move assignment operator
+FourMomentum& FourMomentum::operator=(FourMomentum&& other) noexcept
+{
+  std::cout << "Calling FourMomentum move assignment operator" << std::endl;
+  if(this != &other)
+  {
+    delete four_momentum;
+    four_momentum = other.four_momentum;
+    other.four_momentum = nullptr;
+  }
+  return *this;
 }
 
 double FourMomentum::get_E() const
@@ -85,7 +129,8 @@ double FourMomentum::get_pz() const
 void FourMomentum::set_E(double E)
 {
   // Energy cannot be negative in a four momentum
-  if(E < 0) {
+  if(E < 0)
+  {
     std::cerr << "\033[1;31mError: Energy cannot be negative. Received E = " << E
               << ". Keeping current value.\033[0m" << std::endl;
     return;
@@ -126,4 +171,17 @@ void FourMomentum::set_pz(double pz)
     return;
   }
   (*four_momentum)[3] = pz;
+}
+
+void FourMomentum::print_value() const
+{
+  if(!four_momentum) {
+    throw_missing_data();
+    return;
+  }
+  std::cout << "(E, px, py, pz) = ("
+            << get_E() << ", "
+            << get_px() << ", "
+            << get_py() << ", "
+            << get_pz() << ") MeV" << std::endl;
 }

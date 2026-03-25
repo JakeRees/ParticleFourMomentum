@@ -13,6 +13,7 @@ class FourMomentum
 {
 private:
   std::vector<double>* four_momentum;
+  
 
 public:
 
@@ -36,6 +37,8 @@ public:
   void set_px(double px);
   void set_py(double py);
   void set_pz(double pz);
+
+  void print_value() const;
 };
 
 #endif

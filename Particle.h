@@ -4,38 +4,34 @@
 #include<iostream>
 #include<string>
 #include<cmath>
+#include "FourMomentum.h"
 class Particle
 {
 private:
   std::string type {"None"};
-  double mass {1000.0};
-  double momentum {0.0};
+  FourMomentum four_momentum = {FourMomentum(1, 0, 0, 0)};
+  
 
 public:
 
-  Particle() = default ;
+  Particle() = default;
 
-  Particle(std::string particle_type, double particle_mass, double particle_momentum)
-  {
-    set_type(particle_type);
-    set_mass(particle_mass);
-    set_momentum(particle_momentum);
-  }
+  Particle(const std::string& particle_type, double E, double px, double py, double pz);
 
-  ~Particle(){}
+  ~Particle();
 
-  double gamma();
-  void print_data();
-
+  Particle(const Particle& other);
+  Particle& operator=(const Particle& other);
+  Particle(Particle&& other) noexcept;
+  Particle& operator=(Particle&& other) noexcept;
 
   std::string get_type();
-  double get_mass();
-  double get_momentum();
-  double get_energy_ev();
+  FourMomentum get_four_momentum();
 
   void set_type(std::string new_type);
-  void set_mass(double new_mass);
-  void set_momentum(double new_momentum);
+  void set_four_momentum(double E, double px, double py, double pz);
+
+  void print_data();
 };
 
 #endif

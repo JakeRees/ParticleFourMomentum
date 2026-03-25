@@ -6,8 +6,7 @@
 
 int main()
 {
-  FourMomentum momentum = FourMomentum(-1, 1, 1, 1);
-  Particle electron = Particle("electron", 5.11e5, 1.e6);
+  Particle electron = Particle("electron", 1.0, 0.0, 0.0, 0.0);
   electron.print_data();
 
   return 0;
