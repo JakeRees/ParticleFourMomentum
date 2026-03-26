@@ -3,7 +3,8 @@
 #include <algorithm>
 #include "Particle.h"
 
-const std::string VALID_TYPES[3] = {"electron", "muon", "tau"};
+const std::string VALID_TYPES[6] = {"electron", "muon", "tau", "antielectron",
+                                    "antimuon" , "antitau"};
  
 Particle::Particle(const std::string& particle_type, double E, double px, double py, double pz)
   : four_momentum{E, px, py, pz}
@@ -66,16 +67,23 @@ FourMomentum Particle::get_four_momentum() const
   return four_momentum; 
 }
 
+double Particle::get_invariant_mass() const
+{ 
+  return std::sqrt(four_momentum.dot_product(four_momentum)); 
+}
+
 void Particle::set_type(const std::string& new_type)
 {
   // Make sure this works regardless of capitilisation
-  std::transform(new_type.begin(), new_type.end(), new_type.begin(), ::tolower);
-  // Only allows specific valid particles
+  std::string lower_type = new_type;
+  std::transform(lower_type.begin(), lower_type.end(), lower_type.begin(), ::tolower);
+
+  // Only allows specificied valid particles
   for (std::string check : VALID_TYPES)
   {
-    if (new_type == check)
+    if (lower_type == check)
     {
-      type = new_type;
+      type = lower_type;
       return;
     }
   }
@@ -92,8 +100,9 @@ void Particle::set_four_momentum(double E, double px, double py, double pz)
   four_momentum.set_pz(pz);
 }
 
-void Particle::print_data()
+void Particle::print_data() const
 {
   std::cout << "Particle: " << type << " | ";
   four_momentum.print_value();
+  std::cout << " | Invariant Mass = " << get_invariant_mass();
 }

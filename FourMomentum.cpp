@@ -153,7 +153,7 @@ void FourMomentum::set_pz(double pz)
   (*four_momentum)[3] = pz;
 }
 
-void FourMomentum::print_value()
+void FourMomentum::print_value() const
 {
   if(!four_momentum)
   {
@@ -161,7 +161,7 @@ void FourMomentum::print_value()
     return;
   }
   std::cout << "(E, px, py, pz) = (" << get_E() << ", " << get_px() << ", "
-            << get_py() << ", " << get_pz() << ") MeV" << std::endl;
+            << get_py() << ", " << get_pz() << ") MeV";
 }
 
 FourMomentum FourMomentum::operator+(const FourMomentum& other) const

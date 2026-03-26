@@ -11,7 +11,6 @@ private:
   std::string type {"None"};
   FourMomentum four_momentum = {FourMomentum(1, 0, 0, 0)};
   
-
 public:
 
   Particle() = default;
@@ -27,11 +26,12 @@ public:
 
   std::string get_type() const;
   FourMomentum get_four_momentum() const;
+  double get_invariant_mass() const;
 
   void set_type(const std::string& new_type);
   void set_four_momentum(double E, double px, double py, double pz);
 
-  void print_data();
+  void print_data() const;
 };
 
 #endif

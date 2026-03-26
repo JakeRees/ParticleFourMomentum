@@ -14,7 +14,6 @@ class FourMomentum
 private:
   std::vector<double>* four_momentum;
   
-
 public:
 
   FourMomentum();
@@ -38,7 +37,7 @@ public:
   void set_py(double py);
   void set_pz(double pz);
 
-  void print_value();
+  void print_value() const;
   FourMomentum operator+(const FourMomentum& other) const;
   double dot_product(const FourMomentum& other) const;
 };
