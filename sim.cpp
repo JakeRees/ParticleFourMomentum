@@ -10,7 +10,7 @@ int main()
   std::vector<Particle> particles;
   // Similar particles should have the same invariant mass, regardless of momentums
   particles.push_back(Particle("electron", 3.7764, 1.0, 2.0, 3.0));
-  particles.push_back(Particle("electron", 3.3558, -1.0, 3.0, 1.0));
+  particles.push_back(Particle("antielectron", 3.3558, -1.0, 3.0, 1.0));
   particles.push_back(Particle("muon", 121.0952, 50.0, 30.0, 10.0));
   particles.push_back(Particle("muon", 129.4760, -40.0, 20.0, 60.0));
   particles.push_back(Particle("antimuon", 113.5299, 10.0, -5.0, 40.0));
@@ -28,7 +28,7 @@ int main()
 
   // Testing required by assignment instructions
   FourMomentum electron_sum = particles[0].get_four_momentum() + particles[1].get_four_momentum();
-  std::cout << "\n\nElectron four momentum sum:";
+  std::cout << "\n\nElectron four momentum sum: ";
   electron_sum.print_value();
   std::cout << "\n\n";
 
@@ -37,19 +37,29 @@ int main()
   double muon_dot = particles[2].get_four_momentum().dot_product(particles[3].get_four_momentum());
   std::cout << "\nMuon dot product: " << muon_dot << " MeV^2\n\n";
 
+  std::cout << "\033[1m\033[4mCopy Assignment Test: \033[0m\n\n";
   Particle electron_copy;
   electron_copy = particles[0];
   std::cout << "\nCopied electron data: ";
   electron_copy.print_data();
   std::cout << "\n\n";
 
+  std::cout << "\033[1m\033[4mCopy Constructor Test: \033[0m\n\n";
   Particle muon_copy(particles[2]);
   std::cout << "\nCopied muon data: ";
   muon_copy.print_data();
   std::cout << "\n\n";
 
-  // Move operator here
+  std::cout << "\033[1m\033[4mMove Constructor Test: \033[0m\n\n";
+  std::cout << "Before move: ";
+  particles[1].print_data();
+  std::cout << "\n\n";
+  Particle moved_antielectron(std::move(particles[1]));
+  std::cout << "After move (new object): ";
+  moved_antielectron.print_data();
+  std::cout << "\n\n";
 
+  std::cout << "\033[1m\033[4mMove Assignment Test: \033[0m\n\n";
   std::cout << "Before move: ";
   particles[4].print_data();
   std::cout << "\n\n";
@@ -60,7 +70,7 @@ int main()
   std::cout << "\n\n";
 
   // Testing input validation for each class
-  std::cout << "\033[1mInput Validation Testing: \033[0m\n\n";
+  std::cout << "\033[1m\033[4mInput Validation Testing: \033[0m\n\n";
   Particle test_particle = Particle("dfgdfh", 2, -3.0, 2.0, 5.0);
   Particle test_particle_2 = Particle("ElECtRoN", -4, 1, -5.2, 1.6);
 
