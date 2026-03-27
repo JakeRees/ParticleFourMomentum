@@ -35,14 +35,15 @@ int main()
   std::cout << "\n";
 
   // Testing required by assignment instructions
-  FourMomentum electron_sum = particles[0].get_four_momentum() + particles[1].get_four_momentum();
+
+  // Particle summation and dot products assume to act on the FourMomentum of 
+  // each given particle.
+  FourMomentum electron_sum = particles[0] + particles[1];
   std::cout << "\n\nElectron four momentum sum: ";
   electron_sum.print_value();
   std::cout << "\n\n";
 
-  // four momentum is private, hence the get_four_momentum() instead of 
-  // direct particle addition
-  double muon_dot = particles[2].get_four_momentum().dot_product(particles[3].get_four_momentum());
+  double muon_dot = particles[2].dot_product(particles[3]);
   std::cout << "\nMuon dot product: " << muon_dot << " MeV^2\n\n";
 
   std::cout << "\033[1m\033[4mCopy Assignment Test: \033[0m\n\n";

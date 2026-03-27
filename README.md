@@ -18,9 +18,9 @@ No generative AI was used in the writing of or debugging of this code, all code 
 
 First created a skeleton Particle and FourMomentum class. I created the four momentum class before creating all the constructors and assignment operators to do memory management all at once instead of adding it in after. The four momentum within the FourMomentum class has been stored as a pointer to a vector of doubles. I decided to use a raw pointer instead of a smart pointer to better show the need for proper memory management (as a smart pointer will just delete itself when it goes out of scope).
 
-I added input validation to the setter methods for each source, and decided to make all getter functions const to ensure there is no possible way to accidentally overide data. As required by the assignment, the FourMomentum class uses get_x() and set_x() for each component instead of for the entire four momentum at once. I then added the required dot product and + operators to the fourmomentum class.
+I added input validation to the setter methods for each source, and decided to make all getter method const to ensure there is no possible way to accidentally overide data. As required by the assignment, the FourMomentum class uses get_x() and set_x() for each component instead of for the entire four momentum at once. I then added the required dot product and + operators to the fourmomentum class. Also added a method to the Particle class which returns the invariant mass of the particle. Sometimes this can return NaN as there is no check on the physical validity of the four momentum - only that E is positive.
 
-I then created the tests in main which simply utilises each move and copy operator to demonstrate they work as intended. 
+I also decided for ease of use and cleaner syntax for anyone using this library, that they can also just sum two particles and dot product two particles which will assume to act on their respective four momentums. I then created the tests in main which simply utilises each move and copy operator to demonstrate they work as intended. 
 
 ## 🚀 Usage Instructions
 
@@ -41,6 +41,8 @@ This class is a blueprint for leptons of the standard model.
 
 **Methods:**
 - void print_data(): Prints out all relevant information about the particle.
+- FourMomentum operator+(const Particle& other): Calls operator+ from FourMomentum class.
+- double dot_product(const FourMomentum& other): Calls dot_product from FourMomentum class.
 
 <ins>FourMomentum:</ins>
 This class is a blueprint for FourMomentum objects which contain a vector holding data on energy and momentum for use in relativity calculations.

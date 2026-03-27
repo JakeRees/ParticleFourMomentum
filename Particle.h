@@ -32,6 +32,8 @@ public:
   void set_four_momentum(double E, double px, double py, double pz);
 
   void print_data() const;
+  FourMomentum operator+(const Particle& other) const;
+  double dot_product(const Particle& other) const;
 };
 
 #endif

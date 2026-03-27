@@ -106,3 +106,15 @@ void Particle::print_data() const
   four_momentum.print_value();
   std::cout << " | Invariant Mass = " << get_invariant_mass() << "\n";
 }
+
+FourMomentum Particle::operator+(const Particle& other) const
+{
+  // Overloaded "+" operator, sums components of FourMomentum pairwise
+  return four_momentum + other.four_momentum;
+}
+ 
+double Particle::dot_product(const Particle& other) const
+{
+  // Returns dot product of two four momentums of each particle
+  return four_momentum.dot_product(other.four_momentum);
+}
