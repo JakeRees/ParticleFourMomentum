@@ -62,7 +62,7 @@ std::string Particle::get_type() const
  return type;
 }
 
-FourMomentum Particle::get_four_momentum() const
+const FourMomentum& Particle::get_four_momentum() const
 { 
   return four_momentum; 
 }
@@ -104,5 +104,5 @@ void Particle::print_data() const
 {
   std::cout << "Particle: " << type << " | ";
   four_momentum.print_value();
-  std::cout << " | Invariant Mass = " << get_invariant_mass();
+  std::cout << " | Invariant Mass = " << get_invariant_mass() << "\n";
 }

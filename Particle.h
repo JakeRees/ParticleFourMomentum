@@ -8,7 +8,7 @@
 class Particle
 {
 private:
-  std::string type {"None"};
+  std::string type {"electron"};
   FourMomentum four_momentum = {FourMomentum(1, 0, 0, 0)};
   
 public:
@@ -25,7 +25,7 @@ public:
   Particle& operator=(Particle&& other) noexcept;
 
   std::string get_type() const;
-  FourMomentum get_four_momentum() const;
+  const FourMomentum& get_four_momentum() const;
   double get_invariant_mass() const;
 
   void set_type(const std::string& new_type);

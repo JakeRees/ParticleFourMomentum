@@ -1,3 +1,11 @@
+/*
+                              Jake Rees, 11307374
+                           University of Manchester
+
+This program tests the constructors/operators of the Particle and FourMomentum 
+classes.
+*/
+
 #include<iostream>
 #include<iomanip>
 #include <utility>

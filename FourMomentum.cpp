@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <string>
 
-double throw_missing_data()
+double warn_missing_data()
 {
   std::cerr << "\033[1;31mError: FourMomentum data has been moved or "
             << "is uninitialised.\033[0m" << std::endl;
@@ -83,25 +83,25 @@ FourMomentum& FourMomentum::operator=(FourMomentum&& other) noexcept
 
 double FourMomentum::get_E() const
 {
-  if (!four_momentum) return throw_missing_data();
+  if (!four_momentum) return warn_missing_data();
   return (*four_momentum)[0];
 }
 
 double FourMomentum::get_px() const
 {
-  if (!four_momentum) return throw_missing_data();
+  if (!four_momentum) return warn_missing_data();
   return (*four_momentum)[1];
 }
 
 double FourMomentum::get_py() const
 {
-  if (!four_momentum) return throw_missing_data();
+  if (!four_momentum) return warn_missing_data();
   return (*four_momentum)[2];
 }
 
 double FourMomentum::get_pz() const
 {
-  if (!four_momentum) return throw_missing_data();
+  if (!four_momentum) return warn_missing_data();
   return (*four_momentum)[3];
 }
 
@@ -117,7 +117,7 @@ void FourMomentum::set_E(double E)
   
   if(!four_momentum) 
   {
-    throw_missing_data();
+    warn_missing_data();
     return;
   }
   (*four_momentum)[0] = E;
@@ -127,7 +127,7 @@ void FourMomentum::set_px(double px)
 {
   if(!four_momentum) 
   {
-    throw_missing_data();
+    warn_missing_data();
     return;
   }
   (*four_momentum)[1] = px;
@@ -137,7 +137,7 @@ void FourMomentum::set_py(double py)
 {
   if(!four_momentum)
   {
-    throw_missing_data();
+    warn_missing_data();
     return;
   }
   (*four_momentum)[2] = py;
@@ -147,7 +147,7 @@ void FourMomentum::set_pz(double pz)
 {
   if(!four_momentum) 
   {
-    throw_missing_data();
+    warn_missing_data();
     return;
   }
   (*four_momentum)[3] = pz;
@@ -157,7 +157,7 @@ void FourMomentum::print_value() const
 {
   if(!four_momentum)
   {
-    throw_missing_data();
+    warn_missing_data();
     return;
   }
   std::cout << "(E, px, py, pz) = (" << get_E() << ", " << get_px() << ", "
@@ -174,6 +174,6 @@ FourMomentum FourMomentum::operator+(const FourMomentum& other) const
 double FourMomentum::dot_product(const FourMomentum& other) const
 {
   // Returns dot product of two four momentums
-  return get_E()  * other.get_E() - get_px() * other.get_px()
+  return get_E() * other.get_E() - get_px() * other.get_px()
          - get_py() * other.get_py() - get_pz() * other.get_pz();
 }

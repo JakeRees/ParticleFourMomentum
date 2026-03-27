@@ -1,5 +1,5 @@
 main:
-	g++ sim.cpp Particle.cpp FourMomentum.cpp -Wall -o sim.exe -std=gnu++17
+	g++ sim.cpp Particle.cpp FourMomentum.cpp -Wall -o simulation.exe -std=gnu++17
 
 clean:
-	rm main.exe
+	rm simulation.exe
