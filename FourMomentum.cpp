@@ -21,7 +21,7 @@ FourMomentum::FourMomentum()
 
 FourMomentum::FourMomentum(double E, double px, double py, double pz)
 {
-  std::cout << "Calling FourMomentum paramaterised constructor" << std::endl;
+  std::cout << "Calling FourMomentum parameterised constructor" << std::endl;
   four_momentum = new std::vector<double>;
   if(E < 0) {
     std::cerr << "\033[1;31mError: Energy cannot be negative. Received E = " << E

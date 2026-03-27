@@ -8,12 +8,12 @@
 class Particle
 {
 private:
-  std::string type {"electron"};
-  FourMomentum four_momentum = {FourMomentum(1, 0, 0, 0)};
+  std::string type;
+  FourMomentum four_momentum;
   
 public:
 
-  Particle() = default;
+  Particle();
 
   Particle(const std::string& particle_type, double E, double px, double py, double pz);
 

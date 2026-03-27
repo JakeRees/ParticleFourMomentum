@@ -5,6 +5,13 @@
 
 const std::string VALID_TYPES[6] = {"electron", "muon", "tau", "antielectron",
                                     "antimuon" , "antitau"};
+
+Particle::Particle()
+{
+  std::cout << "Calling Particle default constructor" << std::endl;
+  type = "electron";
+  four_momentum = FourMomentum(1, 0, 0, 0);
+}
  
 Particle::Particle(const std::string& particle_type, double E, double px, double py, double pz)
   : four_momentum{E, px, py, pz}
