@@ -59,5 +59,13 @@ int main()
   moved_antimuon.print_data();
   std::cout << "\n\n";
 
+  // Testing input validation for each class
+  std::cout << "\033[1mInput Validation Testing: \033[0m\n\n";
+  Particle test_particle = Particle("dfgdfh", 2, -3.0, 2.0, 5.0);
+  Particle test_particle_2 = Particle("ElECtRoN", -4, 1, -5.2, 1.6);
+
+  FourMomentum test_momentum = FourMomentum(-3, 24.3, -145.3, -0.24);
+  std::cout << "\n";
+
   return 0;
 }
